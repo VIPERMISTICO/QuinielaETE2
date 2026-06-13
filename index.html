@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiniela Mundial 2026 - Futuro Holográfico</title>
+    <style>
+        :root {
+            --bg-dark: #0a0f1d;
+            --panel-bg: rgba(20, 27, 45, 0.7);
+            --border-neon: #00f2fe;
+            --primary-neon: #00f2fe;
+            --secondary-neon: #9b51e0;
+            --accent-neon: #00ff87;
+            --danger-neon: #ff0055;
+            --text-light: #e2e8f0;
+            --text-muted: #64748b;
+
+            --participante-neon: #FF073a;
+            --status-neon: #FF073a;
+
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Orbitron', 'Segoe UI', system-ui, sans-serif; 
+        }
+
+        body { 
+            background: radial-gradient(circle at 50% 0%, #1e1e38 0%, var(--bg-dark) 70%);
+            color: var(--text-light); 
+            padding-bottom: 60px;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        /* Encabezado Estilo Ciberespacio */
+        header {
+            background: linear-gradient(180deg, rgba(0, 242, 254, 0.1) 0%, rgba(0,0,0,0) 100%);
+            border-bottom: 2px solid var(--primary-neon);
+            padding: 2.5rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.15);
+        }
+        header::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.2), transparent);
+            animation: scanline 6s linear infinite;
+        }
+        header h1 { 
+            font-size: 2.8rem; 
+            font-weight: 900;
+            text-transform: uppercase; 
+            letter-spacing: 4px; 
+            color: #fff;
+            text-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--secondary-neon);
+        }
+        header p { 
+            margin-top: 0.6rem; 
+            color: var(--accent-neon); 
+            font-weight: bold; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            text-shadow: 0 0 5px rgba(0, 255, 135, 0.5);
+        }
+
+        .container { max-width: 1250px; margin: 2rem auto; padding: 0 1rem; }
+
+        /* Tarjetas de Cristalizado Futurista */
+        .card {
+            background: var(--panel-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            border-color: rgba(0, 242, 254, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(0, 242, 254, 0.1);
+        }
+        .card::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 8px; height: 100%;
+            background: var(--primary-neon); border-radius: 16px 0 0 16px;
+        }
+        
+        h2 { color: var(--primary-neon); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; text-shadow: 0 0 8px rgba(0, 242, 254, 0.4); }
+        h3 { color: var(--secondary-neon); margin-bottom: 1rem; text-transform: uppercase; font-size: 1.1rem; }
+
+        /* Inputs y Selects */
+        input[type="text"], input[type="password"], select { 
+            background: rgba(10, 15, 29, 0.8);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            color: var(--text-light);
+            padding: 0.8rem 1.2rem; 
+            border-radius: 8px; 
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-neon);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+        }
+
+        /* BOTONES PREMIUM NEÓN */
+        button { 
+            padding: 0.8rem 1.5rem; 
+            border-radius: 8px; 
+            font-size: 0.95rem;
+            font-weight: bold; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--primary-neon);
+            background: transparent;
+            color: var(--primary-neon);
+            box-shadow: inset 0 0 10px rgba(0, 242, 254, 0.2), 0 0 10px rgba(0, 242, 254, 0.2);
+        }
+        button:hover { 
+            background: var(--primary-neon);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px var(--primary-neon);
+            transform: translateY(-2px);
+        }
+        button.btn-admin { 
+            border-color: var(--secondary-neon);
+            color: var(--secondary-neon);
+            box-shadow: inset 0 0 10px rgba(155, 81, 224, 0.2), 0 0 10px rgba(155, 81, 224, 0.2);
+        }
+        button.btn-admin:hover {
+            background: var(--secondary-neon);
+            color: #fff;
+            box-shadow: 0 0 20px var(--secondary-neon);
+        }
+        button.btn-danger { 
+            border-color: var(--danger-neon);
+            color: var(--danger-neon);
+            box-shadow: inset 0 0 10px rgba(255, 0, 85, 0.2), 0 0 10px rgba(255, 0, 85, 0.2);
+        }
+        button.btn-danger:hover { 
+            background: var(--danger-neon);
+            color: #fff;
+            box-shadow: 0 0 25px var(--danger-neon);
+            animation: pulse-danger 1s infinite alternate;
+        }
+        
+        .login-box { display: flex; gap: 15px; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+        .status-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(0, 242, 254, 0.05); padding: 1rem 1.5rem; border-radius: 8px; margin-bottom: 2rem; border: 1px dashed var(--primary-neon); }
+
+        .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+        .admin-header h2 { margin-bottom: 0; padding-bottom: 0; }
+
+        /* Podio Holográfico */
+        .podium { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; align-items: flex-end; padding: 1rem 0; }
+        .podium-place { text-align: center; background: rgba(10, 15, 29, 0.6); border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px; width: 30%; position: relative;}
+        .podium-place.first { height: 160px; border-color: var(--accent-neon); box-shadow: 0 0 20px rgba(0, 255, 135, 0.2); }
+        .podium-place.second { height: 130px; border-color: var(--primary-neon); box-shadow: 0 0 15px rgba(0, 242, 254, 0.1); }
+        .podium-place.third { height: 115px; border-color: var(--secondary-neon); box-shadow: 0 0 15px rgba(155, 81, 224, 0.1); }
+        .podium-number { font-size: 1.6rem; font-weight: bold; display: block; margin-top: 5px; color: #fff; text-shadow: 0 0 5px var(--primary-neon); }
+
+        /* Tablas */
+        .table-responsive { width: 100%; overflow-x: auto; margin-top: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        table { width: 100%; border-collapse: collapse; min-width: 800px; background: rgba(10, 15, 29, 0.4); }
+        th, td { padding: 1rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { background-color: rgba(20, 27, 45, 0.9); color: var(--primary-neon); text-transform: uppercase; font-size: 0.85rem; font-weight: bold; }
+        tr:hover { background-color: rgba(255, 255, 255, 0.02); }
+
+        /* Celdas de la Matriz */
+        .matrix-table th { background-color: rgba(155, 81, 224, 0.15); color: #fff; font-size: 0.75rem; border-right: 1px solid rgba(255,255,255,0.05); }
+        .matrix-cell { font-weight: bold; font-size: 1.1rem; padding: 0.6rem; border-right: 1px solid rgba(255,255,255,0.02); }
+        .cell-L { color: #00f2fe; text-shadow: 0 0 4px #00f2fe; } 
+        .cell-E { color: #e2e8f0; text-shadow: 0 0 4px #e2e8f0; } 
+        .cell-V { color: #9b51e0; text-shadow: 0 0 4px #9b51e0; } 
+        .cell-hit { background-color: rgba(0, 255, 135, 0.15) !important; color: var(--accent-neon) !important; border: 1px solid var(--accent-neon) !important; text-shadow: 0 0 8px var(--accent-neon); } 
+        .cell-miss { background-color: rgba(255, 0, 85, 0.1) !important; color: var(--danger-neon) !important; opacity: 0.5; } 
+
+        /* Grid Partidos */
+        .matches-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1rem; }
+        @media(min-width: 768px) { .matches-grid { grid-template-columns: 1fr 1fr; } }
+        .match-card { background: rgba(10, 15, 29, 0.5); border: 1px solid rgba(255,255,255,0.05); padding: 1.2rem; border-radius: 12px; display: flex; flex-direction: column; gap: 0.8rem; box-shadow: inset 0 0 15px rgba(255,255,255,0.02); }
+        .match-card.disabled-match { background-color: rgba(20,20,20,0.4); opacity: 0.5; border-left: 4px solid var(--text-muted); }
+        .match-teams { display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; letter-spacing: 0.5px; }
+        
+        /* Controles Radio */
+        .match-prediction { display: flex; justify-content: space-between; gap: 10px; margin-top: 0.5rem; }
+        .match-prediction label { flex: 1; text-align: center; background: rgba(0,0,0,0.3); padding: 0.6rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: bold; color: var(--text-muted); transition: all 0.2s; }
+        .match-prediction input[type="radio"] { display: none; }
+        .match-prediction input[type="radio"]:checked + label { background-color: rgba(0, 242, 254, 0.1); color: var(--primary-neon); border-color: var(--primary-neon); box-shadow: 0 0 10px rgba(0, 242, 254, 0.3); }
+        .match-prediction input[type="radio"]:disabled + label { opacity: 0.4; cursor: not-allowed; }
+
+        .admin-result-select { background-color: rgba(10,15,29,0.9); border: 1px solid var(--secondary-neon); width: 100%; margin-top: 0.5rem; }
+        .locked-msg { color: var(--danger-neon); font-weight: bold; text-align: center; margin-bottom: 1rem; text-shadow: 0 0 5px var(--danger-neon); text-transform: uppercase; font-size: 0.85rem;}
+        
+        /* Badges */
+        .badge { background: rgba(255,255,255,0.1); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; display: inline-block; font-weight: bold; text-transform: uppercase; color: #fff;}
+        .badge.success { background: rgba(0, 255, 135, 0.2); color: var(--accent-neon); border: 1px solid var(--accent-neon); }
+        .badge.warning { background: rgba(255, 0, 85, 0.2); color: var(--danger-neon); border: 1px solid var(--danger-neon); }
+
+        /* Animaciones */
+        @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+        @keyframes pulse-danger { 0% { box-shadow: 0 0 10px rgba(255, 0, 85, 0.2); } 100% { box-shadow: 0 0 25px rgba(255, 0, 85, 0.6); } }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h1>⚡ QUINIELA MUNDIALISTA 2026 - ENDTOEND ⚡</h1>
+        <p>Fase de Grupos Mundial 2026</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- ACCESO AL SISTEMA -->
+        <div class="card">
+            <h2>🔐 Ingreso a Quiniela</h2>
+            <div id="login-section" class="login-box">
+                <input type="text" id="username-input" placeholder="ID de Participante">
+                <input type="password" id="password-input" placeholder="Contraseña (Solo Admin)">
+                <button onclick="login()">Ingresar</button>
+            </div>
+            <div id="session-bar" class="status-bar" style="display: none;">
+                <span>Conexión Establecida: <span id="current-user-display" style="color: var(--primary-neon);">Invitado</span></span>
+                <button onclick="logout()" class="btn-admin">Desconectar</button>
+            </div>
+        </div>
+
+        <!-- PANEL DE CONTROL DEL ADMINISTRADOR -->
+        <div id="admin-panel" class="card" style="display: none; border-left-color: var(--secondary-neon);">
+            <div class="admin-header">
+                <h2>⚙️ Núcleo Central de Control</h2>
+                <button class="btn-danger" onclick="reiniciarQuiniela()">🚨 Formatear Sistema / Vaciar Todo</button>
+            </div>
+            
+            <!-- Bloque: Registrar Jugador -->
+            <div style="margin-bottom: 1.5rem;">
+                <h3>Registrar Operador en la Red (Máximo 16)</h3>
+                <div class="login-box" style="margin-top:0.5rem;">
+                    <input type="text" id="new-player-name" placeholder="Nombre de Operador">
+                    <button onclick="registerPlayer()">Inyectar Código</button>
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Espectros en uso: <span id="player-count" style="color:var(--primary-neon)">0</span> / 16</p>
+            </div>
+
+            <hr style="border-color: rgba(255,255,255,0.05); margin: 1.5rem 0;">
+
+            <!-- Bloque: Reabrir Terminales específicas -->
+            <div style="margin-bottom: 1.5rem; background: rgba(155, 81, 224, 0.05); padding: 1.5rem; border-radius: 10px; border: 1px solid rgba(155, 81, 224, 0.3);">
+                <h3>🔓 Panel de Reactivación de Servidores (Reabrir Terminal)</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    Selecciona un operador bloqueado. Esto le permitirá corregir únicamente los pronósticos de partidos que **aún no tengan resultado establecido**.
+                </p>
+                <div class="login-box">
+                    <select id="admin-unlock-user-select" style="border-color: var(--secondary-neon);">
+                        <option value="">-- Seleccionar Operador Cifrado --</option>
+                    </select>
+                    <button class="btn-admin" onclick="forzarDesbloqueoAdminSeleccionado()">Habilitar Modificación</button>
+                </div>
+            </div>
+
+            <hr style="border-color: rgba(255,255,255,0.05); margin: 1.5rem 0;">
+
+            <!-- NUEVO BLOQUE: Modificar Partido por Usuario (Incluso con resultado establecido por el Admin) -->
+            <div style="margin-bottom: 1.5rem; background: rgba(0, 255, 135, 0.05); padding: 1.5rem; border-radius: 10px; border: 1px solid rgba(0, 255, 135, 0.3);">
+                <h3>✏️ Modificador Forzado de Predicciones por Operador</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                    **Acceso Raíz:** Permite al administrador reescribir directamente la predicción de cualquier usuario, **incluso si el partido ya cuenta con un resultado oficial establecido** por la administración.
+                </p>
+                <div class="login-box" style="gap:10px;">
+                    <select id="forced-modify-user" style="border-color: var(--accent-neon);" onchange="cargarPartidosDelUsuarioForzado()">
+                        <option value="">-- Seleccionar Usuario --</option>
+                    </select>
+                    
+                    <select id="forced-modify-match" style="border-color: var(--accent-neon);" onchange="mostrarPrediccionActualForzada()">
+                        <option value="">-- Seleccionar Partido --</option>
+                    </select>
+
+                    <select id="forced-modify-value" style="border-color: var(--accent-neon);">
+                        <option value="">-- Predicción (Vaciar) --</option>
+                        <option value="L">Victoria Local (L)</option>
+                        <option value="E">Empate Técnico (E)</option>
+                        <option value="V">Victoria Visitante (V)</option>
+
+                    </select>
+
+                    <button class="btn-admin" style="border-color:var(--accent-neon); color:var(--accent-neon);" onclick="ejecutarModificacionForzadaAdmin()">Inyectar Cambio Forzado</button>
+                </div>
+                <div id="forced-current-status-preview" style="font-size:0.85rem; color:var(--text-light); font-weight:bold; margin-top:5px; padding-left:5px;"></div>
+            </div>
+
+            <hr style="border-color: rgba(255,255,255,0.05); margin: 1.5rem 0;">
+            
+            <h3>Sincronizar Resultados Temporales Oficiales</h3>
+            <p style="font-size:0.85rem; margin-bottom:1rem; color: var(--text-muted);">Configura el marcador para congelar los datos y repartir los créditos cuánticos automáticos.</p>
+            <div id="admin-matches" class="matches-grid"></div>
+        </div>
+
+        <!-- PODIO TOP 3 -->
+        <div class="card" style="border-left-color: var(--accent-neon);">
+            <h2>👑 Posiciones (Líderes)</h2>
+            <div class="podium" id="podium-container"></div>
+        </div>
+
+        <!-- TABLA GENERAL DE POSICIONES -->
+        <div class="card">
+            <h2>📊 Clasificación General</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ranking</th>
+                            <th>Participante</th>
+                            <th>Aciertos / Puntos</th>
+                            <th>Estatus de Quiniela</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- MATRIZ CUÁNTICA GLOBAL DE PREDICCIONES -->
+        <div class="card" style="border-left-color: var(--secondary-neon);">
+            <h2>🌌 Predicciones de Participantes</h2>
+            <p style="font-size:0.85rem; margin-bottom: 1rem; color: var(--text-muted);">Info para Participantes. <b style="color:var(--primary-neon);">L</b> = Victoria Local, <b style="color:#e2e8f0;">E</b> = Empate, <b style="color:var(--secondary-neon);">V</b> = Victoria Visitante.</p>
+            <div class="table-responsive">
+                <table class="matrix-table">
+                    <thead>
+                        <tr id="matrix-header"></tr>
+                    </thead>
+                    <tbody id="matrix-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- QUINIELA INTERACTIVA DEL PARTICIPANTE -->
+        <div id="user-quiniela-section" class="card" style="display: none;">
+            <h2>🛸 Modificar Mi Transmisión: <span id="quiniela-user-title"></span></h2>
+            <div id="quiniela-status-msg"></div>
+            <form id="quiniela-form">
+                <div id="user-matches-grid" class="matches-grid"></div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button type="button" id="save-quiniela-btn" onclick="saveUserPredictions()" style="font-size: 1.1rem; padding: 1rem 2.5rem; border-color: var(--accent-neon); color: var(--accent-neon);">Cifrar y Enviar Pronósticos 🔒</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        // DATA DE LOS PARTIDOS
+        const PARTIDOS = [
+            { id: 1, corta: "México vs Sudáfrica", local: 'México', visitante: 'Sudáfrica' },
+            { id: 2, corta: "Corea del Sur vs Chequia", local: 'Corea del Sur', visitante: 'Chequia' },
+            { id: 3, corta: "Canadá vs Bosnia y Herzegovina", local: 'Canadá', visitante: 'Bosnia y Herzegovina' },
+            { id: 4, corta: "Estados Unidos vs Paraguay", local: 'Estados Unidos', visitante: 'Paraguay' },
+            { id: 5, corta: "Catar vs Suiza", local: 'Catar', visitante: 'Suiza' },
+            { id: 6, corta: "Brasil vs Marruecos", local: 'Brasil', visitante: 'Marruecos' },
+            { id: 7, corta: "Haití vs Escocia", local: 'Haití', visitante: 'Escocia' },
+            { id: 8, corta: "Australia vs Turquía", local: 'Australia', visitante: 'Turquía' },
+            { id: 9, corta: "Alemania vs Curazao", local: 'Alemania', visitante: 'Curazao' },
+            { id: 10, corta: "Países Bajos vs Japón", local: 'Países Bajos', visitante: 'Japón' },
+            { id: 11, corta: "Costa de Marfil vs Ecuador", local: 'Costa de Marfil', visitante: 'Ecuador' },
+            { id: 12, corta: "Suecia vs Túnez", local: 'Suecia', visitante: 'Túnez' },
+            { id: 13, corta: "España vs Cabo Verde", local: 'España', visitante: 'Cabo Verde' },
+            { id: 14, corta: "Bélgica vs Egipto", local: 'Bélgica', visitante: 'Egipto' },
+            { id: 15, corta: "Arabia Saudita vs Uruguay", local: 'Arabia Saudita', visitante: 'Uruguay' },
+            { id: 16, corta: "Irán vs Nueva Zelanda", local: 'Irán', visitante: 'Nueva Zelanda' },
+            { id: 17, corta: "Francia vs Senegal", local: 'Francia', visitante: 'Senegal' },
+            { id: 18, corta: "Irak vs Noruega", local: 'Irak', visitante: 'Noruega' },
+            { id: 19, corta: "Argentina vs Argelia", local: 'Argentina', visitante: 'Argelia' },
+            { id: 20, corta: "Austria vs Jordania", local: 'Austria', visitante: 'Jordania' },
+            { id: 21, corta: "Portugal vs RD Congo", local: 'Portugal', visitante: 'RD Congo' },
+            { id: 22, corta: "Inglaterra vs Croacia", local: 'Inglaterra', visitante: 'Croacia' },
+            { id: 23, corta: "Ghana vs Panamá", local: 'Ghana', visitante: 'Panamá' },
+            { id: 24, corta: "Uzbekistan vs Colombia", local: 'Uzbekistan', visitante: 'Colombia' },
+
+            { id: 25, corta: "Chequia vs Sudáfrica", local: 'Chequia', visitante: 'Sudáfrica' },
+            { id: 26, corta: "Suiza vs Bosnia y Herzegovina", local: 'Suiza', visitante: 'Bosnia y Herzegovina' },
+            { id: 27, corta: "Canadá vs Catar", local: 'Canadá', visitante: 'Catar' },
+            { id: 28, corta: "México vs Corea del Sur", local: 'México', visitante: 'Corea del Sur' },
+            { id: 29, corta: "Estador Unidos vs Australia", local: 'Estados Unidos', visitante: 'Australia' },
+            { id: 30, corta: "Escocia vs Marruecos", local: 'Escocia', visitante: 'Marruecos' },
+            { id: 31, corta: "Brasil vs Haití", local: 'Brasil', visitante: 'Haití' },
+            { id: 32, corta: "Turquía vs Paraguay", local: 'Turquía', visitante: 'Paraguay' },
+            { id: 33, corta: "Países Bajos vs Suecia", local: 'Países Bajos', visitante: 'Suecia' },
+            { id: 34, corta: "Alemania vs Costa de Marfil", local: 'Alemania', visitante: 'Costa de Marfil' },
+            { id: 35, corta: "Ecuador vs Curazao", local: 'Ecuador', visitante: 'Curazao' },
+            { id: 36, corta: "Túnez vs Japón", local: 'Túnez', visitante: 'Japón' },
+            { id: 37, corta: "España vs Arabia Saudita", local: 'España', visitante: 'Arabia Saudita' },
+            { id: 38, corta: "Bélgica vs Irán", local: 'Bélgica', visitante: 'Irán' },
+            { id: 39, corta: "Uruguay vs Cabo Verde", local: 'Uruguay', visitante: 'Cabo Verde' },
+            { id: 40, corta: "Nueva Zelanda vs Egipto", local: 'Nueva Zelanda', visitante: 'Egipto' },
+            { id: 41, corta: "Argentina vs Austria", local: 'Argentina', visitante: 'Austria' },
+            { id: 42, corta: "Francia vs Irak", local: 'Francia', visitante: 'Irak' },
+            { id: 43, corta: "Noruega vs Senegal", local: 'Noruega', visitante: 'Senegal' },
+            { id: 44, corta: "Jordania vs Argelia", local: 'Jordania', visitante: 'Argelia' },
+            { id: 45, corta: "Portugal vs Uzbekistan", local: 'Portugal', visitante: 'Uzbekistan' },
+            { id: 46, corta: "Inglaterra vs Ghana", local: 'Inglaterra', visitante: 'Ghana' },
+            { id: 47, corta: "Panamá vs Croacia", local: 'Panamá', visitante: 'Croacia' },
+            { id: 48, corta: "Colombia vs RD Congo", local: 'Colombia', visitante: 'RD Congo' },
+
+            { id: 49, corta: "Suiza vs Canadá", local: 'Suiza', visitante: 'Canadá' },
+            { id: 50, corta: "Bosnia y Herzegovina vs Catar", local: 'Bosnia y Herzegovina', visitante: 'Catar' },
+            { id: 51, corta: "Marruecos vs Haití", local: 'Marruecos', visitante: 'Haití' },
+            { id: 52, corta: "Escocia vs Brasil", local: 'Escocia', visitante: 'Brasil' },
+            { id: 53, corta: "Sudáfrica vs Corea del Sur", local: 'Sudáfrica', visitante: 'Corea del Sur' },
+            { id: 54, corta: "Chequia vs México", local: 'Chequia', visitante: 'México' },
+            { id: 55, corta: "Curazao vs Costa de Marfil", local: 'Curazao', visitante: 'Costa de Marfil' },
+            { id: 56, corta: "Ecuador vs Alemania", local: 'Ecuador', visitante: 'Alemania' },
+            { id: 57, corta: "Túnez vs Paises Bajos", local: 'Túnez', visitante: 'Paises Bajos' },
+            { id: 58, corta: "Japón vs Suecia", local: 'Japón', visitante: 'Suecia' },
+            { id: 59, corta: "Turquía vs Estados Unidos", local: 'Turquía', visitante: 'Estados Unidos' },
+            { id: 60, corta: "Paraguay vs Australia", local: 'Paraguay', visitante: 'Australia' },
+            { id: 61, corta: "Noruega vs Francia", local: 'Noruega', visitante: 'Francia' },
+            { id: 62, corta: "Segenal vs Irak", local: 'Senegal', visitante: 'Irak' },
+            { id: 63, corta: "Cabo Verde vs Arabia Saudita", local: 'Cabo Verde', visitante: 'Arabia Saudita' },
+            { id: 64, corta: "Uruguay vs España", local: 'Uruguay', visitante: 'España' },
+            { id: 65, corta: "Nueva Zelanda vs Bélgica", local: 'Nueva Zelanda', visitante: 'Bélgica' },
+            { id: 66, corta: "Egipto vs Irán", local: 'Egipto', visitante: 'Irán' },
+            { id: 67, corta: "Panamá vs Inglaterra", local: 'Panamá', visitante: 'Inglaterra' },
+            { id: 68, corta: "Croacia vs Ghana", local: 'Croacia', visitante: 'Ghana' },
+            { id: 69, corta: "Colombia vs Portugal", local: 'Colombia', visitante: 'Portugal' },
+            { id: 70, corta: "RD Congo vs Uzbekistan", local: 'RD Congo', visitante: 'Uzbekistan' },
+            { id: 71, corta: "Argelia vs Austria", local: 'Argelia', visitante: 'Austria' },
+            { id: 71, corta: "Jordania vs Argentina", local: 'Jordania', visitante: 'Argentina' }
+
+
+
+        ];
+
+        let BD = JSON.parse(localStorage.getItem('quiniela_cyber_2026')) || {
+            participantes: {}, 
+            resultadosReales: {} 
+        };
+
+        let usuarioActivo = null;
+        let esAdmin = false;
+
+        function guardarBD() {
+            localStorage.setItem('quiniela_cyber_2026', JSON.stringify(BD));
+            actualizarTablasYVistas();
+            actualizarListaDesbloqueoAdmin(); 
+            actualizarSelectoresModificacionForzada(); // Actualizar panel de cambio forzado
+        }
+
+        function reiniciarQuiniela() {
+            if (!esAdmin) return;
+            const conf1 = confirm("⚠️ INSTANCIA CRÍTICA: ¿Estás completamente seguro de purgar el sistema? Se destruirán todos los datos de forma irreversible.");
+            if (conf1) {
+                const conf2 = confirm("🚨 ¡ALERTA DE SEGURIDAD MÁXIMA! ¿Autorizar la desintegración total?");
+                if (conf2) {
+                    BD = { participantes: {}, resultadosReales: {} };
+                    guardarBD();
+                    renderAdminMatches();
+                    logout();
+                    alert("🔄 Purga completada con éxito.");
+                }
+            }
+        }
+
+        function login() {
+            const user = document.getElementById('username-input').value.trim();
+            const pass = document.getElementById('password-input').value;
+
+            if(!user) return alert('Por favor, inserte un ID válido.');
+
+            if(user.toLowerCase() === 'admin') {
+                if(pass === 'ViperMístico') {
+                    esAdmin = true;
+                    usuarioActivo = 'Administrador';
+                    document.getElementById('admin-panel').style.display = 'block';
+                    document.getElementById('user-quiniela-section').style.display = 'none';
+                    renderAdminMatches();
+                    guardarBD(); // Invoca la actualización de todos los selects del panel admin
+                } else {
+                    return alert('Código de acceso raíz denegado.');
+                }
+            } else {
+                if(!BD.participantes[user]) {
+                    return alert('ID de operador no registrado en los servidores.');
+                }
+                esAdmin = false;
+                usuarioActivo = user;
+                document.getElementById('admin-panel').style.display = 'none';
+                document.getElementById('user-quiniela-section').style.display = 'block';
+                document.getElementById('quiniela-user-title').innerText = user;
+                renderUserMatches(user);
+            }
+
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('session-bar').style.display = 'flex';
+            document.getElementById('current-user-display').innerText = usuarioActivo;
+        }
+
+        function logout() {
+            usuarioActivo = null;
+            esAdmin = false;
+            document.getElementById('login-section').style.display = 'flex';
+            document.getElementById('session-bar').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'none';
+            document.getElementById('user-quiniela-section').style.display = 'none';
+            document.getElementById('username-input').value = '';
+            document.getElementById('password-input').value = '';
+        }
+
+        function registerPlayer() {
+            const name = document.getElementById('new-player-name').value.trim();
+            if(!name) return alert('Falta el nombre para cifrar.');
+            if(name.toLowerCase() === 'admin') return alert('ID Restringido.');
+            
+            if(Object.keys(BD.participantes).length >= 16) {
+                return alert('Terminal saturada (Máx. 16 operadores).');
+            }
+
+            if(BD.participantes[name]) {
+                return alert('Este ID ya se encuentra registrado.');
+            }
+
+            BD.participantes[name] = { predicciones: {}, bloqueado: false };
+            document.getElementById('new-player-name').value = '';
+            guardarBD();
+        }
+
+        function actualizarListaDesbloqueoAdmin() {
+            const select = document.getElementById('admin-unlock-user-select');
+            if(!select) return;
+            select.innerHTML = '<option value="">-- Seleccionar Operador Cifrado --</option>';
+            
+            for (let name in BD.participantes) {
+                if(BD.participantes[name].bloqueado) {
+                    const opt = document.createElement('option');
+                    opt.value = name;
+                    opt.innerText = `🔓 Abrir red a: ${name}`;
+                    select.appendChild(opt);
+                }
+            }
+        }
+
+        // Llenar selectores del Modificador Forzado
+        function actualizarSelectoresModificacionForzada() {
+            const selectUser = document.getElementById('forced-modify-user');
+            if(!selectUser) return;
+            
+            const usuarioSeleccionadoPreviamente = selectUser.value;
+            selectUser.innerHTML = '<option value="">-- Seleccionar Usuario --</option>';
+            
+            for(let name in BD.participantes) {
+                const opt = document.createElement('option');
+                opt.value = name;
+                opt.innerText = name;
+                if(name === usuarioSeleccionadoPreviamente) opt.selected = true;
+                selectUser.appendChild(opt);
+            }
+
+            cargarPartidosDelUsuarioForzado();
+        }
+
+        function cargarPartidosDelUsuarioForzado() {
+            const selectUser = document.getElementById('forced-modify-user');
+            const selectMatch = document.getElementById('forced-modify-match');
+            if(!selectUser || !selectMatch) return;
+
+            const usuario = selectUser.value;
+            const partidoSeleccionadoPrevio = selectMatch.value;
+
+            selectMatch.innerHTML = '<option value="">-- Seleccionar Partido --</option>';
+            
+            if(!usuario) {
+                document.getElementById('forced-current-status-preview').innerText = '';
+                return;
+            }
+
+            PARTIDOS.forEach(partido => {
+                const opt = document.createElement('option');
+                opt.value = partido.id;
+                
+                // Marcamos visualmente si el partido ya posee un resultado cargado por el Admin
+                const tieneResultadoAdmin = BD.resultadosReales[partido.id] ? ' (Cerrado por Admin 🚫)' : '';
+                opt.innerText = `${partido.corta}${tieneResultadoAdmin}`;
+                
+                if(partido.id.toString() === partidoSeleccionadoPrevio) opt.selected = true;
+                selectMatch.appendChild(opt);
+            });
+
+            mostrarPrediccionActualForzada();
+        }
+
+        function mostrarPrediccionActualForzada() {
+            const user = document.getElementById('forced-modify-user').value;
+            const matchId = document.getElementById('forced-modify-match').value;
+            const preview = document.getElementById('forced-current-status-preview');
+            
+            if(!user || !matchId) {
+                preview.innerText = '';
+                return;
+            }
+
+            const predActual = BD.participantes[user].predicciones[matchId] || 'Ninguna (Vacío)';
+            const resAdmin = BD.resultadosReales[matchId] || 'Sin establecer';
+
+            preview.innerHTML = `Telemetría Actual: Predicción de <span style="color:var(--primary-neon);">${user}</span>: [<span style="color:var(--accent-neon);">${predActual}</span>] | Resultado Oficial Admin: [<span style="color:var(--secondary-neon);">${resAdmin}</span>]`;
+        }
+
+        // Ejecución del Guardado Forzado del Admin
+        function ejecutarModificacionForzadaAdmin() {
+            const user = document.getElementById('forced-modify-user').value;
+            const matchId = document.getElementById('forced-modify-match').value;
+            const nuevoValor = document.getElementById('forced-modify-value').value;
+
+            if(!user || !matchId) {
+                return alert('Debes seleccionar un operador y un partido para forzar la reescritura.');
+            }
+
+            if(BD.participantes[user]) {
+                if(!nuevoValor) {
+                    delete BD.participantes[user].predicciones[matchId];
+                } else {
+                    BD.participantes[user].predicciones[matchId] = nuevoValor;
+                }
+                
+                guardarBD();
+                mostrarPrediccionActualForzada();
+                alert(`🛠️ Modificación Forzada Exitosa.\nSe ha cambiado la predicción del partido en la base de datos de "${user}".`);
+            }
+        }
+
+        function forzarDesbloqueoAdminSeleccionado() {
+            const select = document.getElementById('admin-unlock-user-select');
+            const usuarioSeleccionado = select.value;
+
+            if(!usuarioSeleccionado) {
+                return alert('Por favor, selecciona un operador válido del menú desplegable.');
+            }
+
+            if(BD.participantes[usuarioSeleccionado]) {
+                BD.participantes[usuarioSeleccionado].bloqueado = false; 
+
+                PARTIDOS.forEach(partido => {
+                    const tieneResultadoOficial = BD.resultadosReales[partido.id] ? true : false;
+                    if (!tieneResultadoOficial) {
+                        delete BD.participantes[usuarioSeleccionado].predicciones[partido.id];
+                    }
+                });
+
+                guardarBD();
+                alert(`⚙️ Servidor reconfigurado para: ${usuarioSeleccionado}.\n\nSe han habilitado únicamente los partidos que no se han jugado o no tienen marcador registrado.`);
+            }
+        }
+
+        function renderAdminMatches() {
+            const container = document.getElementById('admin-matches');
+            if(!container) return;
+            container.innerHTML = '';
+
+            PARTIDOS.forEach(partido => {
+                const real = BD.resultadosReales[partido.id] || '';
+                const div = document.createElement('div');
+                div.className = 'match-card';
+                div.innerHTML = `
+                    <div class="match-teams">
+                        <span>${partido.local}</span> <span>vs</span> <span>${partido.visitante}</span>
+                    </div>
+                    <select class="admin-result-select" onchange="saveRealResult(${partido.id}, this.value)">
+                        <option value="">-- Nodo Libre / Registrar Victoria --</option>
+                        <option value="L" ${real === 'L' ? 'selected' : ''}>Victoria Local (L)</option>
+                        <option value="E" ${real === 'E' ? 'selected' : ''}>Empate Técnico (E)</option>
+                        <option value="V" ${real === 'V' ? 'selected' : ''}>Victoria Visitante (V)</option>
+                        <option value="J" ${real === 'J' ? 'selected' : ''}>En Juego (J)</option>
+                    </select>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function saveRealResult(partidoId, valor) {
+            if(!valor) delete BD.resultadosReales[partidoId];
+            else BD.resultadosReales[partidoId] = valor;
+            guardarBD();
+        }
+
+        function renderUserMatches(username) {
+            const container = document.getElementById('user-matches-grid');
+            container.innerHTML = '';
+            const user = BD.participantes[username];
+            const isQuinielaLocked = user.bloqueado;
+
+            if (isQuinielaLocked) {
+                document.getElementById('save-quiniela-btn').style.display = 'none';
+                document.getElementById('quiniela-status-msg').innerHTML = '<div class="locked-msg">🔒 Transmisión Encriptada. Contacta al Master Admin para reescribir datos.</div>';
+            } else {
+                document.getElementById('save-quiniela-btn').style.display = 'inline-block';
+                document.getElementById('quiniela-status-msg').innerHTML = '<p style="color: var(--accent-neon); margin-bottom: 1rem; font-weight:bold;">✨ Acceso Concedido: Modifica las variables libres. Los partidos completados están bloqueados automáticamente por seguridad.</p>';
+            }
+
+            PARTIDOS.forEach(partido => {
+                const pred = user.predicciones[partido.id] || '';
+                const yaTieneResultadoOficial = BD.resultadosReales[partido.id] ? true : false;
+                const deshabilitarEntrada = isQuinielaLocked || yaTieneResultadoOficial;
+
+                const div = document.createElement('div');
+                div.className = `match-card ${yaTieneResultadoOficial ? 'disabled-match' : ''}`;
+                
+                let tagOficial = yaTieneResultadoOficial ? `<span class="badge warning" style="font-size:0.7rem; width:fit-content;">Nodo Cerrado Oficial 🚫</span>` : '';
+
+                div.innerHTML = `
+                    <div class="match-teams">
+                        <span>${partido.local}</span><span>vs</span><span>${partido.visitante}</span>
+                    </div>
+                    <div class="match-prediction">
+                        <input type="radio" id="m-${partido.id}-L" name="match-${partido.id}" value="L" ${pred === 'L' ? 'checked' : ''} ${deshabilitarEntrada ? 'disabled' : ''}>
+                        <label for="m-${partido.id}-L">L</label>
+                        <input type="radio" id="m-${partido.id}-E" name="match-${partido.id}" value="E" ${pred === 'E' ? 'checked' : ''} ${deshabilitarEntrada ? 'disabled' : ''}>
+                        <label for="m-${partido.id}-E">E</label>
+                        <input type="radio" id="m-${partido.id}-V" name="match-${partido.id}" value="V" ${pred === 'V' ? 'checked' : ''} ${deshabilitarEntrada ? 'disabled' : ''}>
+                        <label for="m-${partido.id}-V">V</label>
+                    </div>
+                    ${tagOficial}
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function saveUserPredictions() {
+            if(!usuarioActivo || esAdmin) return;
+            const user = BD.participantes[usuarioActivo];
+            if(user.bloqueado) return;
+
+            PARTIDOS.forEach(partido => {
+                const yaTieneResultadoOficial = BD.resultadosReales[partido.id] ? true : false;
+                if (!yaTieneResultadoOficial) {
+                    const chosen = document.querySelector(`input[name="match-${partido.id}"]:checked`);
+                    if(chosen) user.predicciones[partido.id] = chosen.value;
+                }
+            });
+
+            user.bloqueado = true; 
+            guardarBD();
+            renderUserMatches(usuarioActivo);
+            alert('Datos cifrados y enviados correctamente.');
+        }
+
+        function calcularPuntos(username) {
+            let aciertos = 0;
+            const predicciones = BD.participantes[username].predicciones;
+            for(let pId in BD.resultadosReales) {
+                if(predicciones[pId] && predicciones[pId] === BD.resultadosReales[pId]) {
+                    aciertos++;
+                }
+            }
+            return aciertos;
+        }
+
+        function actualizarTablasYVistas() {
+            const listado = [];
+            for (let name in BD.participantes) {
+                listado.push({
+                    nombre: name,
+                    puntos: calcularPuntos(name),
+                    bloqueado: BD.participantes[name].bloqueado,
+                    predicciones: BD.participantes[name].predicciones
+                });
+            }
+
+            const elementPlayerCount = document.getElementById('player-count');
+            if(elementPlayerCount) elementPlayerCount.innerText = listado.length;
+            
+            listado.sort((a, b) => b.puntos - a.puntos);
+
+            // Render Tabla Clasificación
+            const tbody = document.getElementById('leaderboard-body');
+            if(tbody) {
+                tbody.innerHTML = listado.length === 0 ? `<tr><td colspan="4" style="color:var(--text-muted);">Esperando inyección de datos de operadores...</td></tr>` : '';
+                listado.forEach((pos, index) => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td><b style="color:var(--primary-neon);">#${index + 1}</b></td>
+                            <td><b style="color:var(--participante-neon);">${pos.nombre}</b></td>
+                            <td><b style="color:var(--accent-neon);">${pos.puntos} PUNTOS</b></td>
+                            <td>
+                                <span style="color:var(--status-neon);" class="badge ${pos.bloqueado ? 'success' : ''}">${pos.bloqueado ? 'Cifrado 🔒' : 'Abierto ✍️'}</span>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+
+            // Render Podio
+            const podio = document.getElementById('podium-container');
+            if(podio) {
+                const p1 = listado[0] || { nombre: 'VACÍO', puntos: 0 };
+                const p2 = listado[1] || { nombre: 'VACÍO', puntos: 0 };
+                const p3 = listado[2] || { nombre: 'VACÍO', puntos: 0 };
+
+                podio.innerHTML = `
+                    <div class="podium-place second">
+                        <strong style="color:var(--primary-neon);">${p2.nombre}</strong><span class="podium-number">${p2.puntos}</span><div style="font-size:0.8rem; color:var(--text-muted); margin-top:5px;">Segundón "Estás a nada"</div>
+                    </div>
+                    <div class="podium-place first">
+                        <span style="font-size:1.6rem; filter: drop-shadow(0 0 5px var(--accent-neon));">⚡</span><br><strong style="color:var(--accent-neon);">${p1.nombre}</strong><span class="podium-number" style="color:var(--accent-neon);">${p1.puntos}</span><div style="color:var(--accent-neon); font-size:0.85rem; font-weight:bold; letter-spacing:1px; margin-top:5px;">NO TE CREAS TANTO</div>
+                    </div>
+                    <div class="podium-place third">
+                        <strong style="color:var(--secondary-neon);">${p3.nombre}</strong><span class="podium-number">${p3.puntos}</span><div style="font-size:0.8rem; color:var(--text-muted); margin-top:5px;">Consuelo Barato</div>
+                    </div>
+                `;
+            }
+
+            // Render Matriz Global
+            const mHeader = document.getElementById('matrix-header');
+            const mBody = document.getElementById('matrix-body');
+            
+            if(mHeader && mBody) {
+                mHeader.innerHTML = '<th style="text-align: left; color:#fff;">Participantes</th>';
+                PARTIDOS.forEach(p => {
+                    mHeader.innerHTML += `<th title="${p.local} vs ${p.visitante}">${p.corta}</th>`;
+                });
+
+                mBody.innerHTML = listado.length === 0 ? `<tr><td colspan="${PARTIDOS.length + 1}" style="color:var(--text-muted);">Sin telemetría disponible...</td></tr>` : '';
+                
+                listado.forEach(player => {
+                    let rowHTML = `<tr><td style="text-align:left; font-weight:bold; border-right:1px solid rgba(255,255,255,0.1); color:#fff;">${player.nombre}</td>`;
+                    
+                    PARTIDOS.forEach(partido => {
+                        const prediccion = player.predicciones[partido.id] || '-';
+                        const resultadoReal = BD.resultadosReales[partido.id];
+                        
+                        let clasesCelda = 'matrix-cell';
+                        if (prediccion !== '-') {
+                            clasesCelda += ` cell-${prediccion}`;
+                        }
+
+                        if (resultadoReal) {
+                            if (prediccion === resultadoReal) {
+                                clasesCelda += ' cell-hit'; 
+                            } else {
+                                clasesCelda += ' cell-miss'; 
+                            }
+                        }
+
+                        rowHTML += `<td class="${clasesCelda}" title="${partido.local} vs ${partido.visitante}">${prediccion}</td>`;
+                    });
+
+                    rowHTML += '</tr>';
+                    mBody.innerHTML += rowHTML;
+                });
+            }
+        }
+
+        // Inicio preventivo
+        actualizarTablasYVistas();
+    </script>
+</body>
+</html>
